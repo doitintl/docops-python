@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "bodil.prettier-toml",
     "codezombiech.gitignore",
     "davidanson.vscode-markdownlint",
     "eamodio.gitlens",
@@ -12,5 +13,6 @@
     "redhat.vscode-yaml",
     "shd101wyy.markdown-preview-enhanced",
     "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
   ]
 }

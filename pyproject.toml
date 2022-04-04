@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "doitintl-docops-devkit"
+version = "0.0.0-a0"
+description = "DoiT International DocOps Development Kit"
+authors = ["DoiT International <engineering@doit-intl.com>"]
+homepage = "https://github.com/doitintl/docops-devkit"
+repository = "https://github.com/doitintl/docops-devkit"
+readme = "README.md"
+keywords = [
+  "cicd",
+  "cli",
+  "docops",
+  "docs",
+  "linting",
+  "qa-automation",
+  "testing"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "License :: Other/Proprietary License",
+  "Natural Language :: English",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Text Processing",
+  "Topic :: Utilities",
+]
+packages = [{ include = "doitintl", "from" = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+prospector = { extras = [
+  "with_pyroma",
+  "with_vulture",
+  "with_bandit"
+], version = "^1.7.7" }
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+prospector = "^1.7.7"
+
+[tool.black]
+line-length = 79
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,90 @@
+# =============================================================================
+# Prospector
+# =============================================================================
+
+# Global configuration
+# http://prospector.landscape.io/en/master/profiles.html
+# =============================================================================
+
+strictness: verylow
+doc-warnings: false
+member-warnings: true
+
+# Without this setting, Prospector incorrectly tries to load the Django plugin,
+# which raised an Exception
+autodetect: false
+
+# Internal check to validate this file
+profile-validator:
+  run: true
+
+# Tool configuration
+# http://prospector.landscape.io/en/master/supported_tools.html
+# =============================================================================
+
+# Bandit - Find common security issues
+# https://github.com/PyCQA/bandit
+# -----------------------------------------------------------------------------
+
+bandit:
+  run: true
+
+# Dodgy - Looks for things that shouldn't be in version control
+# https://github.com/landscapeio/dodgy
+# -----------------------------------------------------------------------------
+
+dodgy:
+  run: true
+
+# McCabe - Complexity checker
+# https://github.com/PyCQA/mccabe
+# -----------------------------------------------------------------------------
+
+mccabe:
+  run: true
+
+# pycodestyle - Checks code against some of the style conventions in PEP 8
+# https://pycodestyle.pycqa.org/en/latest/
+# -----------------------------------------------------------------------------
+
+pycodestyle:
+  full: true
+  options:
+    max-line-length: 79
+
+# pydocstyle - Docstring style checker
+# https://github.com/PyCQA/pydocstyle
+# -----------------------------------------------------------------------------
+
+pydocstyle:
+  run: true
+  disable:
+    - D415
+
+# Pyflakes - Checks Python source files for errors
+# https://launchpad.net/pyflakes
+# -----------------------------------------------------------------------------
+
+pyflakes:
+  run: true
+
+# Pylint - Comprehensive static analysis
+# https://www.pylint.org/
+# -----------------------------------------------------------------------------
+
+pylint:
+  run: true
+
+# Pyroma - Checks for Python best practices
+# https://github.com/regebro/pyroma
+# -----------------------------------------------------------------------------
+
+pyroma:
+  run: true
+
+# Vulture - Finds dead code
+# https://github.com/jendrikseipp/vulture
+# -----------------------------------------------------------------------------
+
+vulture:
+  run: true

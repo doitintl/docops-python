@@ -1,0 +1,7 @@
+cicd
+devkit
+docops
+doitintl
+POSIX
+pyroma
+virtualenvs

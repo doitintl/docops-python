@@ -1,2 +1,2 @@
-# docops-devkit
-DocOps Development Kit
+# DoiT International DocOps Development Kit
+
