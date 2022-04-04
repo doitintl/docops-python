@@ -1,7 +1,11 @@
 cicd
+cmds
 devkit
 docops
 doitintl
+isort
 POSIX
+pydocstyle
+pylint
 pyroma
 virtualenvs

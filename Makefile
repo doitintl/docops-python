@@ -35,20 +35,90 @@ help:
 install:
 	poetry install
 
+# tests
+# -----------------------------------------------------------------------------
+
+.PHONY: test # Test the Python code
+test:
+	poetry run ddk
+
 # check
 # -----------------------------------------------------------------------------
 
 .PHONY: check # Run the project checks
-check:
+check: test
 
 # Secondary targets
 # =============================================================================
 
-# prospector
-# https://prospector.landscape.io/en/master/
+# black
 # -----------------------------------------------------------------------------
 
-check: prospector
-.PHONY: prospector
-prospector:
-	chronic poetry run prospector --messages-only
+check: black
+.PHONY: black
+black:
+	poetry run black --quiet --check .
+
+# black
+# -----------------------------------------------------------------------------
+
+check: isort
+.PHONY: isort
+isort:
+	poetry run isort --profile black --check src
+
+# pydocstyle
+# -----------------------------------------------------------------------------
+
+check: pydocstyle
+.PHONY: pydocstyle
+pydocstyle:
+	poetry run pydocstyle
+
+# flake8
+# -----------------------------------------------------------------------------
+
+check: flake8
+.PHONY: flake8
+flake8:
+	poetry run flake8 src/**/*
+
+# pylint
+# -----------------------------------------------------------------------------
+
+check: pylint
+.PHONY: pylint
+pylint:
+	poetry run pylint --output-format=colorized --score=n src
+
+# vulture
+# -----------------------------------------------------------------------------
+
+check: vulture
+.PHONY: vulture
+vulture:
+	poetry run vulture src
+
+# bandit
+# -----------------------------------------------------------------------------
+
+check: bandit
+.PHONY: bandit
+bandit:
+	poetry run bandit --quiet --recursive src
+
+# dodgy
+# -----------------------------------------------------------------------------
+
+check: dodgy
+.PHONY: dodgy
+dodgy:
+	chronic poetry run dodgy
+
+# pyroma
+# -----------------------------------------------------------------------------
+
+check: pyroma
+.PHONY: pyroma
+pyroma:
+	poetry run pyroma .
