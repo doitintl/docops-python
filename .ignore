@@ -1,0 +1,3 @@
+# Files to ignore when searching for text files (e.g., when using the `ag` or
+# `fdfind` programs)
+.git
