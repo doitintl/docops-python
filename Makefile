@@ -28,6 +28,18 @@ help:
 	@ printf '%s\n\n' 'Available targets:'
 	$(call print-target-list)
 
+# check
+# -----------------------------------------------------------------------------
+
+.PHONY: check # Run all integration checks
+check: lint test
+
+# lint
+# -----------------------------------------------------------------------------
+
+.PHONY: lint # Run all lint programs
+lint:
+
 # install
 # -----------------------------------------------------------------------------
 
@@ -35,18 +47,13 @@ help:
 install:
 	poetry install
 
-# tests
+# test
 # -----------------------------------------------------------------------------
 
 .PHONY: test # Test the Python code
-test:
+test: install
 	poetry run ddk >/dev/null
 
-# check
-# -----------------------------------------------------------------------------
-
-.PHONY: check # Run the project checks
-check: test
 
 # Secondary targets
 # =============================================================================
@@ -54,7 +61,7 @@ check: test
 # black
 # -----------------------------------------------------------------------------
 
-check: black
+lint: black
 .PHONY: black
 black:
 	poetry run black --quiet --check .
@@ -62,7 +69,7 @@ black:
 # black
 # -----------------------------------------------------------------------------
 
-check: isort
+lint: isort
 .PHONY: isort
 isort:
 	poetry run isort --profile black --check src
@@ -70,7 +77,7 @@ isort:
 # pydocstyle
 # -----------------------------------------------------------------------------
 
-check: pydocstyle
+lint: pydocstyle
 .PHONY: pydocstyle
 pydocstyle:
 	poetry run pydocstyle
@@ -78,7 +85,7 @@ pydocstyle:
 # flake8
 # -----------------------------------------------------------------------------
 
-check: flake8
+lint: flake8
 .PHONY: flake8
 flake8:
 	poetry run flake8 src/**/*
@@ -86,7 +93,7 @@ flake8:
 # pylint
 # -----------------------------------------------------------------------------
 
-check: pylint
+lint: pylint
 .PHONY: pylint
 pylint:
 	poetry run pylint --output-format=colorized --score=n src
@@ -94,7 +101,7 @@ pylint:
 # vulture
 # -----------------------------------------------------------------------------
 
-check: vulture
+lint: vulture
 .PHONY: vulture
 vulture:
 	poetry run vulture src
@@ -102,7 +109,7 @@ vulture:
 # bandit
 # -----------------------------------------------------------------------------
 
-check: bandit
+lint: bandit
 .PHONY: bandit
 bandit:
 	poetry run bandit --quiet --recursive src
@@ -110,7 +117,7 @@ bandit:
 # dodgy
 # -----------------------------------------------------------------------------
 
-check: dodgy
+lint: dodgy
 .PHONY: dodgy
 dodgy:
 	chronic poetry run dodgy
@@ -118,7 +125,7 @@ dodgy:
 # pyroma
 # -----------------------------------------------------------------------------
 
-check: pyroma
+lint: pyroma
 .PHONY: pyroma
 pyroma:
 	poetry run pyroma .
