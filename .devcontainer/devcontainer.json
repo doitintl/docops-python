@@ -1,6 +1,13 @@
 {
   "image": "ghcr.io/doitintl/docops/devcontainer:main",
-  "settings": {},
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceRoot}/.venv/bin/python",
+    "python.formatting.blackPath": "${workspaceRoot}/.venv/bin/black",
+    "python.linting.pycodestylePath": "${workspaceRoot}/.venv/bin/pycodestyle",
+    "python.linting.pylintPath": "${workspaceRoot}/.venv/bin/pylint",
+    "python.linting.flake8Path": "${workspaceRoot}/.venv/bin/flake8",
+    "python.linting.banditPath": "${workspaceRoot}/.venv/bin/bandit"
+  },
   "extensions": [],
   "remoteUser": "vscode"
 }

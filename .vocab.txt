@@ -4,6 +4,7 @@ devkit
 docops
 doitintl
 isort
+Popen
 POSIX
 pydocstyle
 pylint

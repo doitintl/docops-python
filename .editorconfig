@@ -20,5 +20,8 @@ max_line_length = off
 indent_size = 4
 indent_style = tab
 
+[poetry.lock]
+max_line_length = off
+
 [COMMIT_EDITMSG]
 max_line_length = 72

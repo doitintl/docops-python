@@ -40,7 +40,7 @@ install:
 
 .PHONY: test # Test the Python code
 test:
-	poetry run ddk
+	poetry run ddk >/dev/null
 
 # check
 # -----------------------------------------------------------------------------
