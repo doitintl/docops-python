@@ -30,3 +30,11 @@ class BaseWrapper:
             stdout, stderr = process.communicate(stdin)
             returncode = process.returncode
             return stdout, stderr, returncode
+
+    def _get_files(self):
+        stdout, stderr, returncode = self._call(
+            "fdfind", "--hidden", "--ignore-case", "--type", "f"
+        )
+        if not returncode:
+            return stdout.splitlines()
+        raise RuntimeError(stderr)

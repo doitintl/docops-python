@@ -24,6 +24,14 @@ def lint(ctx):
 @lint.command(cls=cli.StylizedCommand)
 @click.help_option("-h", "--help", help=cli.HELP_STR)
 @click.pass_obj
+def cspell(runner):
+    """Run the `cspell` program"""
+    sys.exit(runner.cspell())
+
+
+@lint.command(cls=cli.StylizedCommand)
+@click.help_option("-h", "--help", help=cli.HELP_STR)
+@click.pass_obj
 # pylint: disable=invalid-name
 def ec(runner):
     """Run the `ec` program"""

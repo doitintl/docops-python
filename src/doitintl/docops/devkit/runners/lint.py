@@ -1,13 +1,19 @@
 """Lint runner module"""
 
 from .. import runners
-from ..wrappers import ec
+from ..wrappers import cspell, ec
 
 
 # pylint: disable=too-few-public-methods
 class LintRunner(runners.BaseRunner):
 
     """Core application class"""
+
+    @staticmethod
+    def cspell():
+        """Run the `cspell` program wrapper"""
+        wrapper = cspell.CspellWrapper()
+        return wrapper.run()
 
     # pylint: disable=invalid-name
     @staticmethod
