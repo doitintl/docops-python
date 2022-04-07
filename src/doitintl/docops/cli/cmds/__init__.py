@@ -3,7 +3,7 @@
 import click
 
 from ... import cli
-from . import lint
+from . import script
 
 
 @click.group(cls=cli.StylizedGroup)
@@ -11,10 +11,10 @@ from . import lint
 @click.version_option("--version", help=cli.VERSION_STR, message="%(version)s")
 def main():
     # noqa: D403
-    """DoiT International DocOps Development Kit (DDK) CLI tool"""
+    """DoiT International DocOps CLI program"""
 
 
-main.add_command(lint.lint)
+main.add_command(script.run)
 
 if __name__ == "__main__":
     # pylint: disable=no-value-for-parameter

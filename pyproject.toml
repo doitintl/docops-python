@@ -6,12 +6,12 @@ build-backend = "poetry.core.masonry.api"
 line-length = 79
 
 [tool.poetry]
-name = "doitintl-docops-devkit"
+name = "doitintl-docops"
 version = "0.0.0-a0"
 description = "DoiT International DocOps Development Kit"
 authors = ["DoiT International <engineering@doit-intl.com>"]
-homepage = "https://github.com/doitintl/docops-devkit"
-repository = "https://github.com/doitintl/docops-devkit"
+homepage = "https://github.com/doitintl/docops-python"
+repository = "https://github.com/doitintl/docops-python"
 readme = "README.md"
 keywords = [
   "cicd",
@@ -40,7 +40,7 @@ classifiers = [
 packages = [{ include = "doitintl", "from" = "src" }]
 
 [tool.poetry.scripts]
-ddk = "doitintl.docops.devkit.cli.cmds:main"
+docops = "doitintl.docops.cli.cmds:main"
 
 [tool.poetry.dependencies]
 click = "^8.1.2"

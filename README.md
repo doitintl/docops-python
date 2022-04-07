@@ -1,2 +1,3 @@
-# DoiT International DocOps Development Kit
+# DoiT DocOps Python
 
+_DoiT International DocOps Python library and CLI program_

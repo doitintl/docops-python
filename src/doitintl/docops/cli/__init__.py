@@ -5,7 +5,7 @@ import typing as t
 
 import click
 
-from doitintl.docops import devkit
+from doitintl import docops
 
 HELP_STR = "Print this help message and exit"
 VERSION_STR = "Print the program version number and exit"
@@ -67,7 +67,7 @@ class StylizedCommand(click.Command):
 
     def format_help(self, ctx, formatter):
         """Write the augmented help into the formatter if it exists."""
-        width = devkit.DEFAULT_COLUMNS
+        width = docops.DEFAULT_COLUMNS
         terminal_width = shutil.get_terminal_size().columns
         width = min(width, terminal_width)
         short_help = self.get_short_help_str(width)

@@ -52,7 +52,7 @@ install:
 
 .PHONY: test # Test the Python code
 test: install
-	poetry run ddk >/dev/null
+	poetry run docops >/dev/null
 
 
 # Secondary targets
