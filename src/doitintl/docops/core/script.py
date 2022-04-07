@@ -28,6 +28,8 @@ class Script:
 
     def run(self):
         """Call a script"""
+        # Ensure a standard localization environment
+        os.environ["LC_ALL"] = "C"
         with subprocess.Popen(  # nosec B603
             self.path,
             cwd=os.getcwd(),

@@ -80,12 +80,12 @@ class StylizedCommand(click.Command):
 
 
 # pylint: disable=abstract-method
-class StylizedMultiCommand(click.MultiCommand, StylizedCommand):
+class StylizedMultiCommand(StylizedCommand, click.MultiCommand):
 
     """Mixes in the stylized help formatting"""
 
 
-class StylizedGroup(click.Group, StylizedMultiCommand):
+class StylizedGroup(StylizedMultiCommand, click.Group):
 
     """Mixes in the stylized help formatting"""
 

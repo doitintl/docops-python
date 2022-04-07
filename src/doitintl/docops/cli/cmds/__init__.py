@@ -3,7 +3,7 @@
 import click
 
 from ... import cli
-from . import script
+from . import run
 
 
 @click.group(cls=cli.StylizedGroup)
@@ -14,7 +14,7 @@ def main():
     """DoiT International DocOps CLI program"""
 
 
-main.add_command(script.run)
+main.add_command(run.run)
 
 if __name__ == "__main__":
     # pylint: disable=no-value-for-parameter

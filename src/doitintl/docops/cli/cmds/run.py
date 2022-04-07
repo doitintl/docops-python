@@ -8,7 +8,7 @@ from ... import cli
 from ...core.script import ScriptCollection
 
 
-@click.group(cls=cli.StylizedGroup, chain=True)
+@click.group(cls=cli.StylizedGroup)
 @click.help_option("-h", "--help", help=cli.HELP_STR)
 @click.pass_context
 def run(ctx):

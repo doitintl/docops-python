@@ -10,6 +10,12 @@ RESET = [0m
 
 .DEFAULT_GOAL = help
 
+# $(call print-target)
+define print-target
+@ printf "\e$(BOLD)make %s\e$(RESET)\n" "$$(echo $@ | sed 's,.stamp,,')"
+endef
+
+# $(call print-target-list)
 define print-target-list
 @ grep -E '^.PHONY:' $(MAKEFILE_LIST) | grep "#" | \
 	sed -E "s,[^:]+: ([a-z-]+) # (.*),  \x1b$(BOLD)\1\x1b$(RESET)#\2," | \
@@ -28,104 +34,174 @@ help:
 	@ printf '%s\n\n' 'Available targets:'
 	$(call print-target-list)
 
+
+# check
+# -----------------------------------------------------------------------------
+
+.PHONY: bootstrap # Bootstrap the project
+bootstrap:
+
 # check
 # -----------------------------------------------------------------------------
 
 .PHONY: check # Run all integration checks
-check: lint test
+check:
 
-# lint
+# check-lint
 # -----------------------------------------------------------------------------
 
-.PHONY: lint # Run all lint programs
-lint:
+check: check-lint
+.PHONY: check-lint # Lint project files
+check-lint: bootstrap
+
+# check-test
+# -----------------------------------------------------------------------------
+
+check: check-test
+.PHONY: check-test # Test the Python package
+check-test: bootstrap
+	# TODO
+
+# Bootstrap targets
+# =============================================================================
 
 # install
 # -----------------------------------------------------------------------------
 
-.PHONY: install # Install the project dependencies
-install:
+bootstrap: poetry-install
+.PHONY: poetry-install
+poetry-install:
+	$(call print-target)
 	poetry install
 
-# test
+# Lint targets
+# =============================================================================
+
+# docops-run-basic
 # -----------------------------------------------------------------------------
 
-.PHONY: test # Test the Python code
-test: install
-	poetry run docops >/dev/null
+DOCOP_BASIC_TARGETS = \
+	docops-run-ec \
+	docops-run-lintspaces \
+	docops-run-prettier \
+	docops-run-yamllint \
+	docops-run-shellcheck \
+	docops-run-shfmt \
+	docops-run-fdupes
 
+check-lint: docops-basic
+.PHONY: docops-basic
+docops-basic:
+	$(call print-target)
+	@ $(MAKE) --no-print-directory $(DOCOP_BASIC_TARGETS)
 
-# Secondary targets
-# =============================================================================
+# docops-docs
+# -----------------------------------------------------------------------------
+
+	# good-filenames
+	# rm-unused-assets-dry \
+	# optipng-dry \
+	# rm-unused-docs-dry \
+	# markdownlint \
+	# html-entities \
+	# inline-html \
+	# markdown-link-check \
+	# brok
+
+# docops-style
+# -----------------------------------------------------------------------------
+
+	# update-vocab-dry \
+	# cspell \
+	# misspell \
+	# textlint-dry \
+	# vale \
 
 # black
 # -----------------------------------------------------------------------------
 
-lint: black
+check-lint: black
 .PHONY: black
 black:
+	$(call print-target)
 	poetry run black --quiet --check .
 
 # black
 # -----------------------------------------------------------------------------
 
-lint: isort
+check-lint: isort
 .PHONY: isort
 isort:
+	$(call print-target)
 	poetry run isort --profile black --check src
 
 # pydocstyle
 # -----------------------------------------------------------------------------
 
-lint: pydocstyle
+check-lint: pydocstyle
 .PHONY: pydocstyle
 pydocstyle:
+	$(call print-target)
 	poetry run pydocstyle
 
 # flake8
 # -----------------------------------------------------------------------------
 
-lint: flake8
+check-lint: flake8
 .PHONY: flake8
 flake8:
+	$(call print-target)
 	poetry run flake8 src/**/*
 
 # pylint
 # -----------------------------------------------------------------------------
 
-lint: pylint
+check-lint: pylint
 .PHONY: pylint
 pylint:
+	$(call print-target)
 	poetry run pylint --output-format=colorized --score=n src
 
 # vulture
 # -----------------------------------------------------------------------------
 
-lint: vulture
+check-lint: vulture
 .PHONY: vulture
 vulture:
+	$(call print-target)
 	poetry run vulture src
 
 # bandit
 # -----------------------------------------------------------------------------
 
-lint: bandit
+check-lint: bandit
 .PHONY: bandit
 bandit:
+	$(call print-target)
 	poetry run bandit --quiet --recursive src
 
 # dodgy
 # -----------------------------------------------------------------------------
 
-lint: dodgy
+check-lint: dodgy
 .PHONY: dodgy
 dodgy:
+	$(call print-target)
 	chronic poetry run dodgy
 
 # pyroma
 # -----------------------------------------------------------------------------
 
-lint: pyroma
+check-lint: pyroma
 .PHONY: pyroma
 pyroma:
+	$(call print-target)
 	poetry run pyroma .
+
+# TODO: code similarity checks
+
+# Pattern targets
+# =============================================================================
+
+docops-run-%:
+	poetry run docops run $(*)
