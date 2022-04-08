@@ -14,10 +14,6 @@
 # You can check external links with the `brok.sh` script, which caches its
 # results (speeding up subsequent runs).
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 # ANSI formatting
 BLUE='\x1b[1;34m'
 RED='\x1b[1;31m'

@@ -5,22 +5,19 @@
 
 # Usage: ./bin/fdupes.sh
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 # ANSI formatting
 RED='\x1b[1;31m'
 RESET='\x1b[0m'
 
 tmp_repo_copy="$(mktemp -d)"
 rsync -qa . "${tmp_repo_copy}"
-make --no-print-directory -C "${tmp_repo_copy}" --silent clean
 
-rm -rf "${tmp_repo_copy}/.git"
-rm -rf "${tmp_repo_copy}/gitbook/superquery"
-rm -rf "${tmp_repo_copy}/website/static/img"
-rm -rf "${tmp_repo_copy}/website/docs"
+script_path="$(readlink -f "${0}")"
+script_dir="$(dirname "${script_path}")"
+# Remove any files that are not tracked by git
+echo .git >>"${tmp_repo_copy}/.gitignore"
+echo .gitignore >>"${tmp_repo_copy}/.gitignore"
+(cd "${tmp_repo_copy}" && "${script_dir}"/git-clean.sh >/dev/null)
 
 tmp_errors="$(mktemp)"
 fdupes --quiet --recurse --order=name --noempty --sameline "${tmp_repo_copy}" |

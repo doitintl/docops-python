@@ -5,10 +5,6 @@
 
 # Usage: ./bin/website-index.sh TARGET_DIR INDEX_FILE
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 TARGET_DIR=gh-pages
 INDEX_FILE=index.html
 

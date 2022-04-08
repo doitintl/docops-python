@@ -8,10 +8,6 @@
 # A document (i.e., a Markdown file) is considered unused if no other documents
 # in the GitBook space (i.e., the `docs` directory) reference it.
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 # ANSI formatting
 RED='\x1b[1;31m'
 RESET='\x1b[0m'

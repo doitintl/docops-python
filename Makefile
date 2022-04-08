@@ -34,7 +34,6 @@ help:
 	@ printf '%s\n\n' 'Available targets:'
 	$(call print-target-list)
 
-
 # check
 # -----------------------------------------------------------------------------
 
@@ -77,10 +76,10 @@ poetry-install:
 # Lint targets
 # =============================================================================
 
-# docops-run-basic
+# docops-general
 # -----------------------------------------------------------------------------
 
-DOCOP_BASIC_TARGETS = \
+DOCOP_GENERAL_TARGETS = \
 	docops-run-ec \
 	docops-run-lintspaces \
 	docops-run-prettier \
@@ -89,11 +88,11 @@ DOCOP_BASIC_TARGETS = \
 	docops-run-shfmt \
 	docops-run-fdupes
 
-check-lint: docops-basic
-.PHONY: docops-basic
-docops-basic:
+check-lint: docops-general
+.PHONY: docops-general
+docops-general:
 	$(call print-target)
-	@ $(MAKE) --no-print-directory $(DOCOP_BASIC_TARGETS)
+	@ $(MAKE) --no-print-directory $(DOCOP_GENERAL_TARGETS)
 
 # docops-docs
 # -----------------------------------------------------------------------------

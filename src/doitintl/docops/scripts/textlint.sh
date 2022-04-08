@@ -13,10 +13,6 @@
 #   <!-- textlint-disable RULE -->
 #   <!-- textlint-enable -->
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 dry_run=0
 for arg in "$@"; do
     case "${arg}" in

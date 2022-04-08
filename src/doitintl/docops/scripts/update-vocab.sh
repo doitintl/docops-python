@@ -5,10 +5,6 @@
 
 # Usage: ./bin/update-vocab.sh [-d|--dry-run]
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 VOCAB_FILE=".vocab.txt"
 
 dry_run=0

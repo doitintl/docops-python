@@ -7,8 +7,4 @@
 
 # https://github.com/editorconfig-checker/editorconfig-checker
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 ec

@@ -5,10 +5,6 @@
 
 # Usage: ./bin/gen-assets-list.sh ASSETS_DIR
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 ASSETS_DIR=gitbook/cmp/.gitbook/assets
 ASSETS_HTML=gh-pages/assets.html
 ASSETS_URL=https://raw.githubusercontent.com/doitintl/help/main

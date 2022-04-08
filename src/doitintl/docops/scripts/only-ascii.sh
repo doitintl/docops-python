@@ -16,10 +16,6 @@
 #
 # - https://www.toptal.com/designers/htmlarrows/
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 # ANSI formatting
 RED='\x1b[1;31m'
 RESET='\x1b[0m'

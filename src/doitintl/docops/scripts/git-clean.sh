@@ -5,10 +5,6 @@
 
 # Usage: ./bin/git-clean.sh
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 find_ignored() {
     while read -r pattern; do
         find . -name "${pattern}" -not -path './.git/*'

@@ -7,10 +7,6 @@
 
 # TODO: Check the first line (which should always be `---`)
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 find_md_files() {
     fdfind -H -t f '\.md$' --print0
 }

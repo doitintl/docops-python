@@ -5,10 +5,6 @@
 
 # Usage: ./bin/inline-html.sh
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 scan() {
     pattern="${1}"
     if (fdfind --hidden --ignore-case --print0 '\.md$' |

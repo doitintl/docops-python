@@ -5,10 +5,6 @@
 
 # https://github.com/client9/misspell
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 # ANSI formatting
 BLUE='\x1b[1;34m'
 RED='\x1b[1;31m'

@@ -5,10 +5,6 @@
 
 # Usage: ./bin/vale-server.sh
 
-# POSIX locale
-LC_ALL=C
-export LC_ALL
-
 USER_ID="$(id -u)"
 
 sudo mkdir -p "/run/user/${USER_ID}"
