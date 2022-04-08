@@ -3,7 +3,7 @@
 # Remove unused assets from the Git repository
 # =============================================================================
 
-# Usage: ./bin/rm-unused-assets.sh [--dry-run]
+# Usage: ./bin/rm-unused-assets.sh [-f|--fix]
 
 # An asset (e.g., a PNG file or a CSV file) is considered to be unused if no
 # documents (i.e., Markdown files) in the GitBook space (i.e., the `docs`
@@ -13,14 +13,14 @@
 RED='\x1b[1;31m'
 RESET='\x1b[0m'
 
-DOCS_DIR=gitbook/cmp
-ASSETS_DIR=.gitbook/assets
+ASSET_PATTERN='\.(csv|gif|png)$'
+MARKUP_PATTERN='\.(md|mdx|rst)$'
 
-dry_run=0
+fix=0
 for arg in "$@"; do
     case "${arg}" in
-    -d | --dry-run)
-        dry_run=1
+    -f | --fix)
+        fix=1
         shift
         ;;
     -*)
@@ -31,18 +31,23 @@ for arg in "$@"; do
     esac
 done
 
+tmp_markup="$(mktemp)"
+fdfind --no-ignore "${MARKUP_PATTERN}" --print0 |
+    xargs -0 cat >"${tmp_markup}"
+
 tmp_errors="$(mktemp)"
-(cd "${DOCS_DIR}/${ASSETS_DIR}" && fdfind --no-ignore) |
+fdfind --no-ignore "${ASSET_PATTERN}" |
     while read -r file; do
-        pattern="assets/$(basename "${file}")"
-        if ! grep -rsqF "${pattern}" --include='*.md' "${DOCS_DIR}"; then
-            echo "${DOCS_DIR}/${ASSETS_DIR}/${file}" >>"${tmp_errors}"
+        pattern="$(basename "${file}")"
+        if ! grep -rsqF "${pattern}" "${tmp_markup}"; then
+            echo "${file}" >>"${tmp_errors}"
         fi
     done
+rm -f "${tmp_markup}"
 
 status_code=0
 if test -s "${tmp_errors}"; then
-    if test "${dry_run}" = 0; then
+    if test "${fix}" = 1; then
         xargs git rm -f --ignore-unmatch -- <"${tmp_errors}"
         xargs rm -fv <"${tmp_errors}"
     else

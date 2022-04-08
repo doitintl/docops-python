@@ -94,18 +94,30 @@ docops-general:
 	$(call print-target)
 	@ $(MAKE) --no-print-directory $(DOCOP_GENERAL_TARGETS)
 
-# docops-docs
+# docops-assets
 # -----------------------------------------------------------------------------
 
-	# good-filenames
-	# rm-unused-assets-dry \
-	# optipng-dry \
-	# rm-unused-docs-dry \
-	# markdownlint \
-	# html-entities \
-	# inline-html \
-	# markdown-link-check \
-	# brok
+DOCOP_ASSETS_TARGETS = \
+	docops-run-good-filenames \
+	docops-run-rm-unused-assets \
+	docops-run-optipng
+
+check-lint: docops-assets
+.PHONY: docops-assets
+docops-assets:
+	$(call print-target)
+	@ $(MAKE) --no-print-directory $(DOCOP_ASSETS_TARGETS)
+
+# docops-markup
+# -----------------------------------------------------------------------------
+
+DOCOP_MARKUP_TARGETS = \
+	docops-run-rm-unused-docs-dry \
+	docops-run-markdownlint \
+	docops-run-html-entities \
+	docops-run-inline-html \
+	docops-run-markdown-link-check \
+	docops-run-brok
 
 # docops-style
 # -----------------------------------------------------------------------------

@@ -1,19 +1,19 @@
 #!/bin/sh -e
 
-# Wrap the `optipng` command to provide a `--dry-run` option
+# Wrap the `optipng` command to provide a `--fix` option
 # =============================================================================
 
-# Usage: ./bin/optipng.sh [-d|--dry-run]
+# Usage: ./bin/optipng.sh [-f|--fix]
 
 # ANSI formatting
 RED='\x1b[1;31m'
 RESET='\x1b[0m'
 
-dry_run=0
+fix=0
 for arg in "$@"; do
     case "${arg}" in
-    -d | --dry-run)
-        dry_run=1
+    -d | --fix)
+        fix=1
         shift
         ;;
     -*)
@@ -39,7 +39,7 @@ find . -type f -name '*.png' -print |
         if md5sum --check --quiet "${sig_file}" 2>/dev/null; then
             continue
         fi
-        if test "${dry_run}" = 0; then
+        if test "${fix}" = 1; then
             echo "Compressing: ${file}"
             optipng -quiet -strip all "${file}"
             md5sum "${file}" >"${sig_file}"

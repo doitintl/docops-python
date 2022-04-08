@@ -19,6 +19,7 @@ lintspaces
 matchdotfiles
 maxnewlines
 mktemp
+optipng
 Popen
 POSIX
 pycache
