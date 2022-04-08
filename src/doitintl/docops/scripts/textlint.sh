@@ -3,7 +3,7 @@
 # Wrap the `textlint` command to provide extended configuration
 # =============================================================================
 
-# Usage: ./bin/textlint.sh
+# Usage: ./bin/textlint.sh [-f|--fix]
 
 # https://github.com/textlint/textlint
 
@@ -13,11 +13,11 @@
 #   <!-- textlint-disable RULE -->
 #   <!-- textlint-enable -->
 
-dry_run=0
+fix=0
 for arg in "$@"; do
     case "${arg}" in
-    -d | --dry-run)
-        dry_run=1
+    -f | --fix)
+        fix=1
         shift
         ;;
     -*)
@@ -32,12 +32,12 @@ run_fdfind() {
     fdfind -H -t f --print0 '\.md$$'
 }
 
-if test "${dry_run}" = 1; then
-    run_fdfind |
-        xargs -0 textlint \
-            --config .textlintrc.yaml
-else
+if test "${fix}" = 1; then
     run_fdfind |
         xargs -0 textlint --fix \
-            --config .textlintrc.yaml
+            --config .textlintrc.yml
+else
+    run_fdfind |
+        xargs -0 textlint \
+            --config .textlintrc.yml
 fi

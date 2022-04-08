@@ -3,15 +3,15 @@
 # Update the vocabulary file
 # =============================================================================
 
-# Usage: ./bin/update-vocab.sh [-d|--dry-run]
+# Usage: ./bin/update-vocab.sh [-f|--fix]
 
-VOCAB_FILE=".vocab.txt"
+VOCAB_FILE='.docops/cspell/dict.txt'
 
-dry_run=0
+fix=0
 for arg in "$@"; do
     case "${arg}" in
-    -d | --dry-run)
-        dry_run=1
+    -f | --fix)
+        fix=1
         shift
         ;;
     -*)
@@ -38,11 +38,11 @@ match_words() {
 
 tmp_vocab="$(mktemp)"
 
-match_words | awk '{print tolower($0)}' | sort | uniq >"${tmp_vocab}"
+match_words | sort -f | uniq >"${tmp_vocab}"
 
 status_code=0
 
-if test "${dry_run}" = 0; then
+if test "${fix}" = 1; then
     cat <"${tmp_vocab}" >"${VOCAB_FILE}"
 else
     diff --color=always -u \

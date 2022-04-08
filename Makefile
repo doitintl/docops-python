@@ -79,7 +79,7 @@ poetry-install:
 # docops-general
 # -----------------------------------------------------------------------------
 
-DOCOP_GENERAL_TARGETS = \
+DOCOPS_GENERAL_TARGETS = \
 	docops-run-ec \
 	docops-run-lintspaces \
 	docops-run-prettier \
@@ -92,12 +92,12 @@ check-lint: docops-general
 .PHONY: docops-general
 docops-general:
 	$(call print-target)
-	@ $(MAKE) --no-print-directory $(DOCOP_GENERAL_TARGETS)
+	@ $(MAKE) --no-print-directory $(DOCOPS_GENERAL_TARGETS)
 
 # docops-assets
 # -----------------------------------------------------------------------------
 
-DOCOP_ASSETS_TARGETS = \
+DOCOPS_ASSETS_TARGETS = \
 	docops-run-good-filenames \
 	docops-run-rm-unused-assets \
 	docops-run-optipng
@@ -106,12 +106,12 @@ check-lint: docops-assets
 .PHONY: docops-assets
 docops-assets:
 	$(call print-target)
-	@ $(MAKE) --no-print-directory $(DOCOP_ASSETS_TARGETS)
+	@ $(MAKE) --no-print-directory $(DOCOPS_ASSETS_TARGETS)
 
 # docops-markup
 # -----------------------------------------------------------------------------
 
-DOCOP_MARKUP_TARGETS = \
+DOCOPS_MARKUP_TARGETS = \
 	docops-run-rm-unused-docs \
 	docops-run-markdownlint \
 	docops-run-html-entities \
@@ -123,16 +123,23 @@ check-lint: docops-markup
 .PHONY: docops-markup
 docops-markup:
 	$(call print-target)
-	@ $(MAKE) --no-print-directory $(DOCOP_MARKUP_TARGETS)
+	@ $(MAKE) --no-print-directory $(DOCOPS_MARKUP_TARGETS)
 
 # docops-style
 # -----------------------------------------------------------------------------
 
-# update-vocab-dry \
-# cspell \
-# misspell \
-# textlint-dry \
-# vale \
+DOCOPS_STYLE_TARGETS = \
+	docops-run-update-vocab \
+	docops-run-cspell \
+	docops-run-misspell \
+	docops-run-textlint \
+	docops-run-vale
+
+check-lint: docops-style
+.PHONY: docops-style
+docops-style:
+	$(call print-target)
+	@ $(MAKE) --no-print-directory $(DOCOPS_STYLE_TARGETS)
 
 # black
 # -----------------------------------------------------------------------------

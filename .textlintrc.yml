@@ -1,0 +1,9 @@
+rules:
+  # https://github.com/textlint-rule/textlint-rule-no-todo
+  no-todo: true
+  # https://github.com/sapegin/textlint-rule-terminology
+  terminology:
+    defaultTerms: true
+    terms:
+      - DoiT
+      - Doit International

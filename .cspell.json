@@ -4,6 +4,8 @@
   "caseSensitive": false,
   "allowCompoundWords": false,
   "minWordLength": 4,
-  "dictionaries": ["vocab"],
-  "dictionaryDefinitions": [{ "name": "vocab", "path": ".docops/.vocab.txt" }]
+  "dictionaries": ["docops"],
+  "dictionaryDefinitions": [
+    { "name": "docops", "path": ".docops/cspell/dict.txt" }
+  ]
 }
