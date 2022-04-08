@@ -112,21 +112,27 @@ docops-assets:
 # -----------------------------------------------------------------------------
 
 DOCOP_MARKUP_TARGETS = \
-	docops-run-rm-unused-docs-dry \
+	docops-run-rm-unused-docs \
 	docops-run-markdownlint \
 	docops-run-html-entities \
 	docops-run-inline-html \
 	docops-run-markdown-link-check \
 	docops-run-brok
 
+check-lint: docops-markup
+.PHONY: docops-markup
+docops-markup:
+	$(call print-target)
+	@ $(MAKE) --no-print-directory $(DOCOP_MARKUP_TARGETS)
+
 # docops-style
 # -----------------------------------------------------------------------------
 
-	# update-vocab-dry \
-	# cspell \
-	# misspell \
-	# textlint-dry \
-	# vale \
+# update-vocab-dry \
+# cspell \
+# misspell \
+# textlint-dry \
+# vale \
 
 # black
 # -----------------------------------------------------------------------------

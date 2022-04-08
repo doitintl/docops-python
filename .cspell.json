@@ -5,5 +5,5 @@
   "allowCompoundWords": false,
   "minWordLength": 4,
   "dictionaries": ["vocab"],
-  "dictionaryDefinitions": [{ "name": "vocab", "path": ".vocab.txt" }]
+  "dictionaryDefinitions": [{ "name": "vocab", "path": ".docops/.vocab.txt" }]
 }

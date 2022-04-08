@@ -3,7 +3,7 @@
 # Remove unused documents from the Git repository
 # =============================================================================
 
-# Usage: ./bin/rm-unused-assets.sh [-d|--dry-run]
+# Usage: ./bin/rm-unused-assets.sh [-f|--fix]
 
 # A document (i.e., a Markdown file) is considered unused if no other documents
 # in the GitBook space (i.e., the `docs` directory) reference it.
@@ -12,13 +12,13 @@
 RED='\x1b[1;31m'
 RESET='\x1b[0m'
 
-DOCS_DIR=gitbook/cmp
+MARKUP_PATTERN='\.(md|mdx|rst)$'
 
-dry_run=0
+fix=0
 for arg in "$@"; do
     case "${arg}" in
-    -d | --dry-run)
-        dry_run=1
+    -f | --fix)
+        fix=1
         shift
         ;;
     -*)
@@ -29,21 +29,25 @@ for arg in "$@"; do
     esac
 done
 
+tmp_markup="$(mktemp)"
+fdfind --no-ignore "${MARKUP_PATTERN}" --print0 |
+    xargs -0 cat >"${tmp_markup}"
+
 tmp_errors="$(mktemp)"
-(cd "${DOCS_DIR}" && fdfind --ignore-case '\.md$') |
+fdfind --ignore-case "${MARKUP_PATTERN}" |
+    grep -vE '^([A-Z-]+).md$' |
+    grep -v 'SUMMARY.md' |
     while read -r file; do
-        if test "${file}" = 'SUMMARY.md'; then
-            continue
-        fi
         basename="$(basename "${file}")"
-        if ! grep -rsqF "${basename}" --include='*.md' "./${DOCS_DIR}"; then
-            echo "${DOCS_DIR}/${file}" >>"${tmp_errors}"
+        if ! grep -rsqF "${basename}" "${tmp_markup}"; then
+            echo "${file}" >>"${tmp_errors}"
         fi
     done
+rm -f "${tmp_markup}"
 
 status_code=0
 if test -s "${tmp_errors}"; then
-    if test "${dry_run}" = 0; then
+    if test "${fix}" = 1; then
         xargs git rm -f --ignore-unmatch -- <"${tmp_errors}"
         xargs rm -fv <"${tmp_errors}"
     else
