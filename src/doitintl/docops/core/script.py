@@ -51,9 +51,7 @@ class ScriptCollection:
     @staticmethod
     def list():
         """Return a list of available scripts"""
-        scripts = []
-        for path in sorted(SCRIPTS_DIR.glob("*.sh")):
-            scripts.append(Script(path))
+        scripts = [Script(path) for path in sorted(SCRIPTS_DIR.glob("*.sh"))]
         return list(scripts)
 
     @staticmethod
